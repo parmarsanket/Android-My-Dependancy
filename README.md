@@ -255,18 +255,17 @@ coil = "2.6.0"
 ### 📦 `[libraries]`
 ```toml
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
-coil-compose-core = { module = "io.coil-kt:coil-compose-core", version.ref = "coil" }
-coil-mp = { module = "io.coil-kt:coil", version.ref = "coil" }
-coil-network-ktor3 = { module = "io.coil-kt:coil-network-ktor3", version.ref = "coil" }
+coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
+#if ktor using
+#coil-ktor = { module = "io.coil-kt:coil-network-ktor3", version.ref = "coil" }
 ```
 
 ### 🧵 `[bundles]`
 ```toml
 coil = [
     "coil-compose",
-    "coil-compose-core",
-    "coil-mp",
-    "coil-network-ktor3"
+    "coil-core",
+   # "coil-ktor
 ]
 ```
 
@@ -278,10 +277,10 @@ implementation(libs.bundles.coil)
 ### 📁 Hardcoded
 ```kotlin
 // Coil
-implementation("io.coil-kt:coil-compose:2.6.0")
-implementation("io.coil-kt:coil-compose-core:2.6.0")
 implementation("io.coil-kt:coil:2.6.0")
-implementation("io.coil-kt:coil-network-ktor3:2.6.0")
+implementation("io.coil-kt:coil-compose:2.6.0")
+
+implementation("io.coil-kt:coil-network-ktor3:2.6.0") // Only if you're using Ktor
 ```
 
 ---
