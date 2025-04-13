@@ -1,4 +1,4 @@
-# 🌟 Android Dependencies Setup Guide
+![image](https://github.com/user-attachments/assets/ffffa37b-83b9-41fb-9924-b44abb146823)# 🌟 Android Dependencies Setup Guide
 
 This file provides a clean and readable reference for setting up common Android dependencies using **Version Catalog** (`libs.versions.toml`), **Gradle Kotlin DSL**, required **Plugins**, and optional **Hardcoded Dependencies** for easy switching.
 
@@ -282,8 +282,10 @@ implementation("io.coil-kt:coil-compose:2.6.0")
 
 implementation("io.coil-kt:coil-network-ktor3:2.6.0") // Only if you're using Ktor
 ```
+# 🖼️ icons extended
+---
+implementation("androidx.compose.material:material-icons-extended")
 
 ---
-
 Let me know if you'd like to add **Navigation Compose**, **Coroutines**, **WorkManager**, or others!
 
