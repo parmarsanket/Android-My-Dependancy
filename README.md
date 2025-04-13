@@ -284,9 +284,10 @@ implementation("io.coil-kt:coil-network-ktor3:2.6.0") // Only if you're using Kt
 ```
 
 ## 🖼️ icons extended
----kotlin
+```kotlin
 implementation("androidx.compose.material:material-icons-extended")
+```
 
----
+
 Let me know if you'd like to add **Navigation Compose**, **Coroutines**, **WorkManager**, or others!
 
