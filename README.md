@@ -282,8 +282,9 @@ implementation("io.coil-kt:coil-compose:2.6.0")
 
 implementation("io.coil-kt:coil-network-ktor3:2.6.0") // Only if you're using Ktor
 ```
-# 🖼️ icons extended
----
+
+## 🖼️ icons extended
+---kotlin
 implementation("androidx.compose.material:material-icons-extended")
 
 ---
