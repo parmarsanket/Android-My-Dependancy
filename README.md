@@ -32,8 +32,10 @@ plugins {
     id("com.android.library") version "8.7.3" apply false
     id("org.jetbrains.kotlin.android") version "2.1.0" apply false
     id("org.jetbrains.kotlin.plugin.compose") version "2.1.0" apply false
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0" apply false
     id("com.google.devtools.ksp") version "2.1.0-1.0.29" apply false
     id("com.google.dagger.hilt.android") version "2.54" apply false
+    id("com.google.gms.google-services") version "4.4.2" apply false
 }
 ```
 
@@ -44,8 +46,10 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jetbrains.kotlin.plugin.serialization")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android") // For Hilt DI
+    id("com.google.gms.google-services") // For Firebase
 }
 ```
 
@@ -113,41 +117,25 @@ implementation("androidx.datastore:datastore-preferences:1.1.1")
 
 ## 🌐 Networking
 
-### Retrofit + OkHttp (Minimal)
+### Retrofit + Kotlinx Serialization (Recommended)
 
 ```kotlin
-// Retrofit - Essential only
+// Retrofit
 implementation("com.squareup.retrofit2:retrofit:2.11.0")
-implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
 implementation("com.squareup.okhttp3:okhttp:4.12.0")
-```
+implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
-### Moshi (JSON Parser - No Serialization Plugin Required)
-
-```kotlin
-// Moshi - Alternative to Gson
-implementation("com.squareup.moshi:moshi:1.15.1")
-implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
-ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
-
-// Use with Retrofit
-implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
-```
-
-### Kotlin Serialization (If Needed)
-
-```kotlin
-// Add plugin in app level build.gradle.kts
-// id("org.jetbrains.kotlin.plugin.serialization")
-
-// Serialization - Only if type-safe navigation or Ktor needed
+// Kotlinx Serialization
 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 ```
 
-### Gson (Simple Alternative)
+### Gson Alternative (If Needed)
 
 ```kotlin
-// Gson - Lightweight JSON
+// Retrofit + Gson
+implementation("com.squareup.retrofit2:retrofit:2.11.0")
+implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 implementation("com.google.code.gson:gson:2.11.0")
 ```
 
@@ -220,6 +208,83 @@ implementation("me.saket.telephoto:zoomable:0.18.0")
 
 ---
 
+## 🔥 Firebase
+
+### Firebase Core (BOM - Bill of Materials)
+
+```kotlin
+// Firebase BOM - Manages all Firebase versions
+implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+```
+
+### Firebase Analytics
+
+```kotlin
+// Firebase Analytics
+implementation("com.google.firebase:firebase-analytics")
+```
+
+### Firebase Authentication
+
+```kotlin
+// Firebase Auth
+implementation("com.google.firebase:firebase-auth")
+
+// Google Sign-In
+implementation("com.google.android.gms:play-services-auth:21.3.0")
+```
+
+### Firebase Firestore (Cloud Database)
+
+```kotlin
+// Firestore
+implementation("com.google.firebase:firebase-firestore")
+```
+
+### Firebase Realtime Database
+
+```kotlin
+// Realtime Database
+implementation("com.google.firebase:firebase-database")
+```
+
+### Firebase Cloud Storage
+
+```kotlin
+// Cloud Storage
+implementation("com.google.firebase:firebase-storage")
+```
+
+### Firebase Cloud Messaging (FCM - Push Notifications)
+
+```kotlin
+// FCM
+implementation("com.google.firebase:firebase-messaging")
+```
+
+### Firebase Crashlytics
+
+```kotlin
+// Crashlytics - Add plugin: id("com.google.firebase.crashlytics")
+implementation("com.google.firebase:firebase-crashlytics")
+```
+
+### Firebase Remote Config
+
+```kotlin
+// Remote Config
+implementation("com.google.firebase:firebase-config")
+```
+
+### Firebase Dynamic Links
+
+```kotlin
+// Dynamic Links
+implementation("com.google.firebase:firebase-dynamic-links")
+```
+
+---
+
 ## 📷 Camera & Media
 
 ### CameraX
@@ -285,6 +350,38 @@ implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
 ---
 
+## 🎨 UI & Animation
+
+### Lottie (Animations)
+
+```kotlin
+// Lottie - JSON Animations
+implementation("com.airbnb.android:lottie-compose:6.6.2")
+```
+
+### Splash Screen
+
+```kotlin
+// Splash Screen API
+implementation("androidx.core:core-splashscreen:1.0.1")
+```
+
+### Accompanist (Compose Utilities)
+
+```kotlin
+// System UI Controller
+implementation("com.google.accompanist:accompanist-systemuicontroller:0.36.0")
+
+// Pager (ViewPager for Compose)
+implementation("com.google.accompanist:accompanist-pager:0.36.0")
+implementation("com.google.accompanist:accompanist-pager-indicators:0.36.0")
+
+// Swipe Refresh
+implementation("com.google.accompanist:accompanist-swiperefresh:0.36.0")
+```
+
+---
+
 ## 🧪 Testing
 
 ### Unit Testing
@@ -325,32 +422,43 @@ kspAndroidTest("com.google.dagger:hilt-android-compiler:2.54")
 ✅ **Navigation** - `navigation-compose`  
 ✅ **DI** - `hilt-android` or `koin-android`  
 ✅ **Database** - `room-ktx`  
-✅ **Network** - `retrofit` + `okhttp`  
-✅ **JSON** - `gson` or `moshi`  
-✅ **Images** - `coil-compose` or `glide`  
-✅ **Async** - `coroutines-android`  
+✅ **Network** - `retrofit` + `kotlinx-serialization`  
+✅ **Images** - `coil-compose`  
+✅ **Firebase** - `firebase-auth`, `firebase-firestore`, `firebase-storage`  
+✅ **Async** - `coroutines-android`, `workmanager`  
+✅ **UI** - `lottie-compose`, `accompanist`  
 ✅ **Testing** - `junit`, `mockk`, `espresso`
 
 ---
 
 ## 💡 Quick Tips
 
-### Dependency Combinations
+### Essential Interview Setup
 
-**Networking Option 1: Retrofit + Gson**
+**Minimal Interview Starter (5 min setup)**
 ```kotlin
+// DI
+implementation("io.insert-koin:koin-androidx-compose:4.1.1")
+
+// Room
+implementation("androidx.room:room-ktx:2.6.1")
+ksp("androidx.room:room-compiler:2.6.1")
+
+// Retrofit + Serialization
 implementation("com.squareup.retrofit2:retrofit:2.11.0")
-implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-implementation("com.google.code.gson:gson:2.11.0")
+implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+
+// Coil
+implementation("io.coil-kt.coil3:coil-compose:3.0.4")
 ```
 
-**Networking Option 2: Retrofit + Moshi (No Serialization Plugin)**
+**Firebase Starter**
 ```kotlin
-implementation("com.squareup.retrofit2:retrofit:2.11.0")
-implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
-implementation("com.squareup.moshi:moshi:1.15.1")
-implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
-ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
+implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+implementation("com.google.firebase:firebase-auth")
+implementation("com.google.firebase:firebase-firestore")
+implementation("com.google.firebase:firebase-analytics")
 ```
 
 ### Build Optimization
