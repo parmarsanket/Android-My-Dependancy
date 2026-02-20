@@ -79,9 +79,19 @@ implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
 implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3:2.10.0-alpha07")
 ```
 ## Icon exteanted
+
+### In Build
 ```
 implementation("androidx.compose.material:material-icons-extended:1.7.8")
 ```
+### feather Icons
+```
+    implementation("br.com.devsrsouza.compose.icons:feather:1.1.1")
+```
+###  tabler Icons
+    ```
+    implementation("br.com.devsrsouza.compose.icons:tabler-icons:1.1.1")
+    ```
 ---
 
 ## 💉 Dependency Injection
