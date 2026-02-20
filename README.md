@@ -78,6 +78,10 @@ implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
 //nav3
 implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3:2.10.0-alpha07")
 ```
+## Icon exteanted
+```
+implementation("androidx.compose.material:material-icons-extended:1.7.8")
+```
 ---
 
 ## 💉 Dependency Injection
