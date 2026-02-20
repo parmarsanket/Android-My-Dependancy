@@ -71,7 +71,13 @@ implementation("androidx.navigation:navigation-compose:2.8.5")
 implementation("androidx.navigation3:navigation3-runtime:1.0.0")
 implementation("androidx.navigation3:navigation3-ui:1.0.0")
 ```
-
+## Viewmodel 
+ ```
+//nav2 for
+implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+//nav3
+implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3:2.10.0-alpha07")
+```
 ---
 
 ## 💉 Dependency Injection
